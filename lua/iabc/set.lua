@@ -40,9 +40,9 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 --font settings
-vim.g.WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
-vim.g.DevIconsEnableFoldersOpenClose = 1
-vim.g.DevIconsEnableFolderPatternMatching = 1
+-- vim.g.WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+-- vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
+-- vim.g.DevIconsEnableFoldersOpenClose = 1
+-- vim.g.DevIconsEnableFolderPatternMatching = 1
 
 
