@@ -5,7 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable', 
     lazypath,
   }
 end
@@ -17,16 +17,21 @@ require('lazy').setup({
   'github/copilot.vim',
   'preservim/nerdtree',
  'voldikss/vim-floaterm',
-  'B4rc1/obsidian-companion.nvim',
   'mfussenegger/nvim-dap',
   { 'folke/which-key.nvim', opts = {} },
-  {
+ -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   ft = "markdown",
+  --   build = "cd app && npm install",
+  --   init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+  -- },
+
+{
     "iamcco/markdown-preview.nvim",
-    ft = "markdown",
-    build = "cd app && npm install",
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
-  },
-  
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+},
     "goolord/alpha-nvim",
 
   { -- Set lualine as statusline
@@ -37,6 +42,24 @@ require('lazy').setup({
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
+      },
+    },
+  },
+  -- Obsidian.nvim
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    -- lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/Obsidian-linux",
+        },
       },
     },
   },
