@@ -5,7 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', 
+    '--branch=stable',
     lazypath,
   }
 end
@@ -19,20 +19,14 @@ require('lazy').setup({
  'voldikss/vim-floaterm',
   'mfussenegger/nvim-dap',
   { 'folke/which-key.nvim', opts = {} },
- -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   ft = "markdown",
-  --   build = "cd app && npm install",
-  --   init = function() vim.g.mkdp_filetypes = { "markdown" } end,
-  -- },
-
-{
+ {
     "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-},
-    "goolord/alpha-nvim",
+    ft = "markdown",
+    build = "cd app && npm install",
+    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+  },
+
+   "goolord/alpha-nvim",
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -48,8 +42,7 @@ require('lazy').setup({
   -- Obsidian.nvim
   {
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
-    -- lazy = true,
+    version = "*",
     ft = "markdown",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -57,7 +50,7 @@ require('lazy').setup({
     opts = {
       workspaces = {
         {
-          name = "personal",
+          name = "Obsidian-linux",
           path = "~/Obsidian-linux",
         },
       },
@@ -145,14 +138,14 @@ require('lazy').setup({
   },
   --colroschemes
   'tanvirtin/monokai.nvim',
-  { 
+  {
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'onedark'
     end,
   },
-  { 
+  {
     "catppuccin/nvim", name = "catppuccin"
   },
   {'Yazeed1s/oh-lucy.nvim'},
