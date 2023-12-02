@@ -33,16 +33,24 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+
+-- show hidden files
+vim.g.NERDTreeShowHidden = 1
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
---font settings
+
+vim.o.fillchars = vim.o.fillchars .. 'eob: '
+
+-- font settings
 -- vim.g.WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
 -- vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
 -- vim.g.DevIconsEnableFoldersOpenClose = 1
 -- vim.g.DevIconsEnableFolderPatternMatching = 1
 
-
+-- Remove vertical split indicator
+vim.cmd [[set fillchars+=vert:\ ]]  -- Set the vertical split character to a space

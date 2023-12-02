@@ -3,6 +3,7 @@ require('iabc');
 -- colorscheme
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "monokai"
+-- vim.cmd.colorscheme "gruvbox"
 vim.cmd('colorscheme base16-tomorrow-night')
 -- vim.cmd('colorscheme base16-gruvbox-dark-soft')
 
