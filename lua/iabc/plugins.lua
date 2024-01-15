@@ -19,6 +19,7 @@ require('lazy').setup({
   'preservim/nerdtree',
  'voldikss/vim-floaterm',
   'mfussenegger/nvim-dap',
+  'nvim-tree/nvim-web-devicons',
   { 'folke/which-key.nvim', opts = {} },
   --discord presence
   -- 'andweeb/presence.nvim',
@@ -52,7 +53,13 @@ require('lazy').setup({
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
   },
 
-   "goolord/alpha-nvim",
+ {
+    'goolord/alpha-nvim',
+    requires = { 'nvim-tree/nvim-web-devicons' },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.startify'.config)
+    end
+  },
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',

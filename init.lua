@@ -1,5 +1,16 @@
 
 require('iabc');
+--astro lsp config
+require'lspconfig'.astro.setup{}
+vim.filetype.add({
+	extension = {
+		mdx = "mdx",
+	},
+})
+
+
+vim.treesitter.language.register("markdown", "mdx")
+vim.treesitter.language.register("astro", "astro")
 -- colorscheme
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "monokai"
@@ -48,7 +59,6 @@ require('telescope').setup {
 }
 
 
-require'alpha'.setup(require'alpha.themes.startify'.config)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
