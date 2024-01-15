@@ -2,6 +2,14 @@
 require('iabc');
 --astro lsp config
 require'lspconfig'.astro.setup{}
+require('nvim-treesitter.configs').setup({
+  ensure_installed = {'astro', 'tsx', 'typescript', 'html'},
+  auto_install = true,
+  highlight = {
+    enable = true
+  }
+})
+
 vim.filetype.add({
 	extension = {
 		mdx = "mdx",
@@ -10,7 +18,6 @@ vim.filetype.add({
 
 
 vim.treesitter.language.register("markdown", "mdx")
-vim.treesitter.language.register("astro", "astro")
 -- colorscheme
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "monokai"
