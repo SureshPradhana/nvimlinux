@@ -16,10 +16,20 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
   'github/copilot.vim',
-  'preservim/nerdtree',
   'voldikss/vim-floaterm',
   'mfussenegger/nvim-dap',
   'nvim-tree/nvim-web-devicons',
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
   { 'folke/which-key.nvim',          opts = {} },
   --discord presence
   -- 'andweeb/presence.nvim',
