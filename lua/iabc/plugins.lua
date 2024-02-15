@@ -20,6 +20,11 @@ require('lazy').setup({
   'mfussenegger/nvim-dap',
   'nvim-tree/nvim-web-devicons',
   {
+    'akinsho/nvim-bufferline.lua',
+    version = '*',
+    dependencies = { 'kyazdani42/nvim-web-devicons' }
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     lazy = false,
@@ -292,3 +297,30 @@ require('lazy').setup({
 
   {}
 })
+
+require('bufferline').setup {
+  options = {
+    mode = "buffers", -- set to "tabs" to only show tabpages instead
+    numbers = "none",
+    diagnostics = "nvim_lsp",
+    buffer_close_icon = '󰅖',
+    close_icon = '',
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        highlight = "Directory",
+        separator = true -- use a "true" to enable the default, or set your own character
+      }
+    },
+    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+      local s = " "
+      for e, n in pairs(diagnostics_dict) do
+        local sym = e == "error" and " "
+            or (e == "warning" and " " or "")
+        s = s .. n .. sym
+      end
+      return s
+    end,
+  }
+}
