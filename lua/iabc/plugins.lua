@@ -237,8 +237,10 @@ require('lazy').setup({
     config = function()
       require("toggleterm").setup {
         open_mapping = [[<c-\>]],
-        size = 20,
-        direction = 'float'
+        size = 50,
+        direction = 'vertical',
+        persist_mode = true,
+        start_in_insert = true
       }
 
       function _G.set_terminal_keymaps()
