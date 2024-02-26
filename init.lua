@@ -20,8 +20,9 @@ vim.treesitter.language.register("markdown", "mdx")
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "monokai"
 -- vim.cmd.colorscheme "gruvbox"
-vim.cmd('colorscheme base16-tomorrow-night')
--- vim.cmd('colorscheme base16-gruvbox-dark-soft')
+-- vim.cmd('colorscheme base16-tomorrow-night')
+-- vim.cmd('colorscheme base16-gruvbox-material-dark-hard')
+vim.cmd('colorscheme base16-da-one-gray')
 
 
 -- [[ Basic Keymaps ]]
@@ -169,3 +170,7 @@ mason_lspconfig.setup_handlers {
 		}
 	end,
 }
+
+
+-- Set the colorscheme
+vim.cmd('colorscheme base16-da-one-gray')

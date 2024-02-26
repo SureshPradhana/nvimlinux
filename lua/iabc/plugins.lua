@@ -22,7 +22,6 @@ require('lazy').setup({
   {
     'akinsho/nvim-bufferline.lua',
     version = '*',
-    dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -32,7 +31,9 @@ require('lazy').setup({
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup {}
+      require("nvim-tree").setup {
+
+      }
     end,
   },
   { 'folke/which-key.nvim',          opts = {} },
@@ -276,10 +277,6 @@ require('lazy').setup({
   'tanvirtin/monokai.nvim',
   {
     'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
   },
   {
     "catppuccin/nvim", name = "catppuccin"
@@ -291,7 +288,6 @@ require('lazy').setup({
   'RRethy/nvim-base16',
   'kaicataldo/material.vim',
   'nordtheme/vim',
-
   -- custom plugins
   -- { import = 'custom.plugins' },
 
