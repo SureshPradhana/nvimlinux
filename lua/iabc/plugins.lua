@@ -20,6 +20,92 @@ require('lazy').setup({
   'mfussenegger/nvim-dap',
   'nvim-tree/nvim-web-devicons',
   {
+    'tanvirtin/monokai.nvim' },
+  {
+    'navarasu/onedark.nvim',
+  },
+  {
+    "catppuccin/nvim", name = "catppuccin"
+  },
+  { 'Yazeed1s/oh-lucy.nvim' },
+  'mhartington/oceanic-next',
+  'shaunsingh/nord.nvim',
+  'navarasu/onedark.nvim',
+  'RRethy/nvim-base16',
+  'kaicataldo/material.vim',
+  'nordtheme/vim',
+  'numToStr/Comment.nvim',
+  -- color picker
+  {
+    "ziontee113/color-picker.nvim",
+    config = function()
+      require("color-picker")
+    end,
+  },
+  -- icon picker
+  {
+    "ziontee113/icon-picker.nvim",
+    config = function()
+      require("icon-picker").setup({ disable_legacy_commands = true })
+
+      local opts = { noremap = true, silent = true }
+
+      vim.keymap.set("n", "<Leader><Leader>i", "<cmd>IconPickerNormal<cr>", opts)
+      vim.keymap.set("n", "<Leader><Leader>y", "<cmd>IconPickerYank<cr>", opts) --> Yank the selected icon into register
+      vim.keymap.set("i", "<C-i>", "<cmd>IconPickerInsert<cr>", opts)
+    end
+  },
+  {
+    'stevearc/dressing.nvim',
+  },
+  -- Fuzzy Finder (files, lsp, etc)
+  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    cond = function()
+      return vim.fn.executable 'make' == 1
+    end,
+  },
+
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    build = ":TSUpdate",
+  },
+  -- toggleterm
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      require("toggleterm").setup {
+        open_mapping = [[<c-\>]],
+        size = 50,
+        direction = 'vertical',
+        persist_mode = true,
+        start_in_insert = true
+      }
+
+      function _G.set_terminal_keymaps()
+        local opts = { buffer = 0 }
+        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+      end
+
+      vim.cmd('autocmd! TermOpen * lua set_terminal_keymaps()')
+    end
+  },
+  -- glow for markdown preview
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+
+  {
     'akinsho/nvim-bufferline.lua',
     version = '*',
   },
@@ -36,9 +122,7 @@ require('lazy').setup({
       }
     end,
   },
-  { 'folke/which-key.nvim',          opts = {} },
-  --discord presence
-  -- 'andweeb/presence.nvim',
+  { 'folke/which-key.nvim',  opts = {} },
   "folke/zen-mode.nvim",
   opts = {
     window = {
@@ -59,6 +143,23 @@ require('lazy').setup({
         cursorcolumn = false,   -- disable cursor column
         foldcolumn = "0",       -- disable fold column
         -- list = false, -- disable whitespace characters
+      },
+    },
+  },
+  -- Obsidian.nvim
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "Obsidian-linux",
+          path = "~/Obsidian-linux",
+        },
       },
     },
   },
@@ -87,24 +188,23 @@ require('lazy').setup({
         section_separators = '',
       },
     },
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
-  -- Obsidian.nvim
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*",
-    ft = "markdown",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
     opts = {
-      workspaces = {
-        {
-          name = "Obsidian-linux",
-          path = "~/Obsidian-linux",
-        },
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
       },
-    },
+    }
   },
+
+
+
 
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -213,85 +313,9 @@ require('lazy').setup({
   },
 
 
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
-
-  -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
-
-
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make',
-    cond = function()
-      return vim.fn.executable 'make' == 1
-    end,
-  },
-
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    build = ":TSUpdate",
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    config = function()
-      require("toggleterm").setup {
-        open_mapping = [[<c-\>]],
-        size = 50,
-        direction = 'vertical',
-        persist_mode = true,
-        start_in_insert = true
-      }
-
-      function _G.set_terminal_keymaps()
-        local opts = { buffer = 0 }
-        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-        vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-      end
-
-      vim.cmd('autocmd! TermOpen * lua set_terminal_keymaps()')
-    end
-  },
-  --colroschemes
-  'tanvirtin/monokai.nvim',
-  {
-    'navarasu/onedark.nvim',
-  },
-  {
-    "catppuccin/nvim", name = "catppuccin"
-  },
-  { 'Yazeed1s/oh-lucy.nvim' },
-  'mhartington/oceanic-next',
-  'shaunsingh/nord.nvim',
-  'navarasu/onedark.nvim',
-  'RRethy/nvim-base16',
-  'kaicataldo/material.vim',
-  'nordtheme/vim',
   -- custom plugins
   -- { import = 'custom.plugins' },
 
-  {}
 })
 
 require('bufferline').setup {
