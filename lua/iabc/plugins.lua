@@ -34,7 +34,13 @@ require('lazy').setup({
   'RRethy/nvim-base16',
   'kaicataldo/material.vim',
   'nordtheme/vim',
-  'numToStr/Comment.nvim',
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
+  },
   -- color picker
   {
     "ziontee113/color-picker.nvim",
@@ -172,7 +178,6 @@ require('lazy').setup({
 
   {
     'goolord/alpha-nvim',
-    requires = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end

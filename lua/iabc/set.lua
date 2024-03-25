@@ -1,4 +1,3 @@
-
 --custom settings
 local set = vim.opt
 
@@ -22,7 +21,7 @@ set.textwidth = 96
 
 
 -- Sync clipboard between OS and Neovim.
-set.clipboard = 'unnamedplus'
+set.clipboard:append('unnamedplus')
 
 -- Enable break indent
 set.breakindent = true
@@ -62,7 +61,7 @@ vim.o.fillchars = vim.o.fillchars .. 'eob: '
 -- vim.g.DevIconsEnableFolderPatternMatching = 1
 
 -- Remove vertical split indicator
-vim.cmd [[set fillchars+=vert:\ ]]  -- Set the vertical split character to a space
+vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a space
 
 
 
@@ -70,6 +69,6 @@ vim.cmd [[set fillchars+=vert:\ ]]  -- Set the vertical split character to a spa
 local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = fmtGroup,
-	pattern = { "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.py","*.astro","*.js",".ts" },
+	pattern = { "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.py", "*.astro", "*.js", ".ts" },
 	command = "lua vim.lsp.buf.format({ async = false })",
 })
