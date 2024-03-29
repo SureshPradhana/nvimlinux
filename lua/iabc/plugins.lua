@@ -13,6 +13,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
+  {
+    'krivahtoo/silicon.nvim',
+    build = "./install.sh"
+  },
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
   'github/copilot.vim',
@@ -81,33 +85,6 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
-  -- toggleterm
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    config = function()
-      require("toggleterm").setup {
-        open_mapping = [[<c-\>]],
-        size = 50,
-        direction = 'vertical',
-        persist_mode = true,
-        start_in_insert = true
-      }
-
-      function _G.set_terminal_keymaps()
-        local opts = { buffer = 0 }
-        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-        vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-      end
-
-      vim.cmd('autocmd! TermOpen * lua set_terminal_keymaps()')
-    end
-  },
   -- glow for markdown preview
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 
@@ -157,6 +134,7 @@ require('lazy').setup({
     "epwalsh/obsidian.nvim",
     version = "*",
     ft = "markdown",
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -175,6 +153,7 @@ require('lazy').setup({
     build = "cd app && npm install",
     init = function() vim.g.mkdp_filetypes = { "markdown" } end,
   },
+  { "rcarriga/nvim-notify", },
 
   {
     'goolord/alpha-nvim',
@@ -287,23 +266,7 @@ require('lazy').setup({
               { name = "path" },
             }, {
               { name = "neorg" },
-            }),
-
-            formatting = {
-              format = function(entry, vim_item)
-                -- Kind icons
-                vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                -- Source
-                vim_item.menu = ({
-                  buffer = "[Buffer]",
-                  nvim_lsp = "[LSP]",
-                  luasnip = "[LuaSnip]",
-                  nvim_lua = "[NvimAPI]",
-                  path = "[Path]",
-                })[entry.source.name]
-                return vim_item
-              end,
-            },
+            })
           })
 
           cmp.setup.cmdline(":", {
@@ -323,13 +286,11 @@ require('lazy').setup({
 
 })
 
+local bufferline = require("bufferline");
 require('bufferline').setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
-    numbers = "none",
     diagnostics = "nvim_lsp",
-    buffer_close_icon = '󰅖',
-    close_icon = '',
     offsets = {
       {
         filetype = "NvimTree",
@@ -338,6 +299,7 @@ require('bufferline').setup {
         separator = true -- use a "true" to enable the default, or set your own character
       }
     },
+    separator_style = "thin",
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       local s = " "
       for e, n in pairs(diagnostics_dict) do
@@ -349,3 +311,11 @@ require('bufferline').setup {
     end,
   }
 }
+
+require('silicon').setup({
+  font = 'Hack Nerd Font Mono=16',
+  theme = 'Monokai Extended',
+  output = {
+    path = "/home/suresh/linuxshare/snapShots/",
+  },
+})

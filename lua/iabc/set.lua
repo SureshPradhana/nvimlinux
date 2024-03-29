@@ -7,10 +7,10 @@ set.hlsearch = false
 set.incsearch = true
 
 -- Make line numbers default
-set.number = true
+
+set.number = true         --line numbers
 
 set.relativenumber = true --relative line numbers
-
 -- Enable mouse mode
 set.mouse = 'a'
 set.tabstop = 4
@@ -69,6 +69,12 @@ vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a spac
 local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = fmtGroup,
-	pattern = { "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.py", "*.astro", "*.js", ".ts" },
+	pattern = { "*.svelte", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.py", "*.astro", "*.js", ".ts" },
 	command = "lua vim.lsp.buf.format({ async = false })",
 })
+
+-- Configuration for floaterm key mappings
+vim.g.floaterm_keymap_prev = '<Leader>p'
+vim.g.floaterm_keymap_next = '<leader>n'
+vim.g.floaterm_keymap_toggle = '<Leader>\\'
+vim.g.floaterm_keymap_new = '<Leader>t'
