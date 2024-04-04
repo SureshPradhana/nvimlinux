@@ -253,11 +253,11 @@ require('lazy').setup({
                 require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
               end,
             },
-             view = {
-+              entries = {
-+                follow_cursor = true,
-+              }
-+            },
+            view = {
+              entries = {
+                follow_cursor = true,
+              }
+            },
 
             window = {
               -- completion = cmp.config.window.bordered(),
