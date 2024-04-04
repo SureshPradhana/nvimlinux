@@ -12,3 +12,4 @@
    - Git >= 2.44.0 (for partial clone support)
    - [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts#font-installation) (optional, for enhanced UI)
 
+

@@ -29,4 +29,23 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- set kj as Esc
 vim.keymap.set("i", "kj", "<Esc>", opts)
+vim.keymap.set("n", "kj", "<Esc>", opts)
+vim.keymap.set("v", "kj", "<Esc>", opts)
 vim.keymap.set("n", "<leader>o", ":source $HOME/.config/nvim/init.lua <CR>", opts)
+
+
+-- copilot keymaps
+
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
+
+
+vim.keymap.set('i', '<C-[>', '<Plug>(copilot-dismiss)')
+vim.keymap.set('i', '<M-]>', '<Plug>(copilot-next)')
+vim.keymap.set('i', '<M-[>', '<Plug>(copilot-previous)')
+vim.keymap.set('i', '<M-\\>', '<Plug>(copilot-suggest)')
+vim.keymap.set('i', '<M-[>', '<Plug>(copilot-previous)')

@@ -6,6 +6,13 @@ vim.filetype.add({
 		mdx = "mdx",
 	},
 })
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require 'lspconfig'.tsserver.setup({
+	capabilities = capabilities
+})
+require 'lspconfig'.html.setup({
+	capabilities = capabilities
+})
 -- treesitter setup
 require('nvim-treesitter.configs').setup({
 	ensure_installed = { 'astro', 'tsx', 'typescript', 'lua', 'html' },

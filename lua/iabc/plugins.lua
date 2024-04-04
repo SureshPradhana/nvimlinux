@@ -13,6 +13,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  "mg979/vim-visual-multi",
+
   {
     'krivahtoo/silicon.nvim',
     build = "./install.sh"
@@ -62,7 +65,7 @@ require('lazy').setup({
 
       vim.keymap.set("n", "<Leader><Leader>i", "<cmd>IconPickerNormal<cr>", opts)
       vim.keymap.set("n", "<Leader><Leader>y", "<cmd>IconPickerYank<cr>", opts) --> Yank the selected icon into register
-      vim.keymap.set("i", "<C-i>", "<cmd>IconPickerInsert<cr>", opts)
+      vim.keymap.set("n", "<A-i>", "<cmd>IconPickerInsert<cr>", opts)
     end
   },
   {
@@ -86,7 +89,7 @@ require('lazy').setup({
     build = ":TSUpdate",
   },
   -- glow for markdown preview
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  { "ellisonleao/glow.nvim",         config = true, cmd = "Glow" },
 
   {
     'akinsho/nvim-bufferline.lua',
@@ -105,7 +108,7 @@ require('lazy').setup({
       }
     end,
   },
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   "folke/zen-mode.nvim",
   opts = {
     window = {
@@ -148,10 +151,14 @@ require('lazy').setup({
     },
   },
   {
-    "iamcco/markdown-preview.nvim",
-    ft = "markdown",
-    build = "cd app && npm install",
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+       "SureshPradhana/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    build = "cd app && npm install && git restore .",
+
   },
   { "rcarriga/nvim-notify", },
 
@@ -246,6 +253,12 @@ require('lazy').setup({
                 require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
               end,
             },
+             view = {
++              entries = {
++                follow_cursor = true,
++              }
++            },
+
             window = {
               -- completion = cmp.config.window.bordered(),
               -- documentation = cmp.config.window.bordered(),
