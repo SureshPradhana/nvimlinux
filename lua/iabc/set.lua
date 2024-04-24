@@ -1,5 +1,6 @@
 --custom settings
 local set = vim.opt
+local g = vim.g
 
 
 -- Set highlight on search
@@ -43,7 +44,7 @@ set.timeoutlen = 300
 
 
 -- show hidden files
-vim.g.NERDTreeShowHidden = 1
+g.NERDTreeShowHidden = 1
 
 -- Set completeopt to have a better completion experience
 set.completeopt = 'menuone,noselect'
@@ -55,10 +56,10 @@ set.termguicolors = true
 vim.o.fillchars = vim.o.fillchars .. 'eob: '
 
 -- font settings
--- vim.g.WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
--- vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
--- vim.g.DevIconsEnableFoldersOpenClose = 1
--- vim.g.DevIconsEnableFolderPatternMatching = 1
+-- g.WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+-- g.WebDevIconsUnicodeDecorateFolderNodes = 1
+-- g.DevIconsEnableFoldersOpenClose = 1
+-- g.DevIconsEnableFolderPatternMatching = 1
 
 -- Remove vertical split indicator
 vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a space
@@ -73,8 +74,28 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.format({ async = false })",
 })
 
--- Configuration for floaterm key mappings
-vim.g.floaterm_keymap_prev = '<Leader>p'
-vim.g.floaterm_keymap_next = '<leader>n'
-vim.g.floaterm_keymap_toggle = '<Leader>\\'
-vim.g.floaterm_keymap_new = '<Leader>t'
+
+g.floaterm_keymap_toggle = '<leader>\\'
+g.floaterm_keymap_new = '<leader>t'
+g.floaterm_keymap_next = '<leader>n'
+g.floaterm_keymap_prev = '<leader>p'
+-- Define a function to toggle the floatterm
+function ToggleFloatTerm()
+	g.floaterm_keymap_toggle = '<leader>\\'
+end
+
+function NewFloatTerm()
+	g.floaterm_keymap_new = '<leader>t'
+end
+
+function NextFloatTerm()
+	g.floaterm_keymap_next = '<leader>n'
+end
+
+function PrevFloatTerm()
+	g.floaterm_keymap_prev = '<leader>p'
+end
+
+g.coc_global_extensions = { 'coc-svelte', 'coc-json', 'coc-git', 'coc-html', 'coc-emmet', 'coc-pairs',
+	'coc-html-css-support', 'coc-json', 'coc-deno', 'coc-css', 'coc-tsserver', '@yaegassy/coc-intelephense',
+	'coc-snippets', 'coc-svelte' }

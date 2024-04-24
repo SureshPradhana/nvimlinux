@@ -1,1 +1,15 @@
-{"rust-analyzer.server.path": "/home/suresh/.local/bin/rust-analyzer"}    
+{
+  "coc.preferences.formatOnSave": true,
+  "coc.preferences.enableMessageDialog": true,
+  "suggest.floatConfig": {
+    "border": true
+  },
+  "signature.floatConfig": {
+    "border": true
+  },
+  "hover.floatConfig": {
+    "border": true
+  },
+  "svelte.enable-ts-plugin": true,
+  "snippets.ultisnips.pythonPrompt": false
+}
