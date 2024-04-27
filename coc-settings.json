@@ -1,6 +1,9 @@
 {
   "coc.preferences.formatOnSave": true,
   "coc.preferences.enableMessageDialog": true,
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true,
   "suggest.floatConfig": {
     "border": true
   },

@@ -23,16 +23,6 @@ require('nvim-treesitter.configs').setup({
 
 vim.treesitter.language.register("markdown", "mdx")
 
--- colorscheme
--- vim.cmd.colorscheme "catppuccin"
--- vim.cmd.colorscheme "monokai"
--- vim.cmd.colorscheme "gruvbox"
--- vim.cmd('colorscheme base16-tomorrow-night')
--- vim.cmd('colorscheme base16-gruvbox-material-dark-hard')
-vim.cmd('colorscheme base16-da-one-gray')
--- vim.cmd('colorscheme onedark')
--- vim.cmd('colorscheme base16-default-dark')
-
 -- [[ Basic Keymaps ]]
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -115,3 +105,15 @@ require("color-picker").setup({
 vim.cmd([[hi FloatBorder guibg=NONE]])
 
 vim.opt.conceallevel = 2
+
+
+
+-- colorscheme
+-- vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "monokai"
+-- vim.cmd.colorscheme "gruvbox"
+-- vim.cmd('colorscheme base16-tomorrow-night')
+-- vim.cmd('colorscheme base16-gruvbox-material-dark-hard')
+vim.cmd('colorscheme base16-da-one-gray')
+-- vim.cmd('colorscheme onedark')
+-- vim.cmd('colorscheme base16-default-dark')

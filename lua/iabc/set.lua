@@ -99,3 +99,4 @@ end
 g.coc_global_extensions = { 'coc-svelte', 'coc-json', 'coc-git', 'coc-html', 'coc-emmet', 'coc-pairs',
 	'coc-html-css-support', 'coc-json', 'coc-deno', 'coc-css', 'coc-tsserver', '@yaegassy/coc-intelephense',
 	'coc-snippets', 'coc-svelte' }
+
