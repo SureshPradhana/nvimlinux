@@ -7,9 +7,6 @@ vim.filetype.add({
 	},
 })
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require 'lspconfig'.tsserver.setup({
-	capabilities = capabilities
-})
 require 'lspconfig'.html.setup({
 	capabilities = capabilities
 })
@@ -166,8 +163,6 @@ local servers = {
 	-- gopls = {},
 	pyright = {},
 	rust_analyzer = {},
-	tsserver = {},
-
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
@@ -190,16 +185,38 @@ mason_lspconfig.setup {
 	ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-	function(server_name)
-		require('lspconfig')[server_name].setup {
+
+local handlers = {
+	-- The first entry (without a key) will be the default handler
+	-- and will be called for each installed server that doesn't have
+	-- a dedicated handler.
+	function(server_name) -- default handler (optional)
+		require("lspconfig")[server_name].setup {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = servers[server_name],
 		}
 	end,
+	-- Next, you can provide targeted overrides for specific servers.
+	["denols"] = function()
+		require("lspconfig").denols.setup {
+			on_attach = on_attach,
+			init_options = {
+				lint = true,
+				unstable = true,
+			},
+			root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+		}
+	end,
+	["tsserver"] = function()
+		require("lspconfig").tsserver.setup {
+			on_attach = on_attach,
+			root_dir = require("lspconfig").util.root_pattern("package.json"),
+			single_file_support = false
+		}
+	end,
 }
-
+require("mason-lspconfig").setup_handlers(handlers)
 
 -- Set the colorscheme
 vim.cmd('colorscheme base16-da-one-gray')

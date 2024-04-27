@@ -69,7 +69,7 @@ vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a spac
 local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = fmtGroup,
-	pattern = { "*.svelte", "*.scss", "*.less", "*.sass", "*.css", "*.md", "*.markdown", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.py", "*.astro", "*.js", "*.ts" },
+	pattern = { "*.svelte", "*.scss", "*.less", "*.sass", "*.css", "*.md", "*.markdown", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.jsonc", "*.py", "*.astro", "*.js", "*.ts" },
 	command = "lua vim.lsp.buf.format({ async = false })",
 })
 
