@@ -1,4 +1,5 @@
 require('iabc');
+
 --astro lsp config
 require 'lspconfig'.astro.setup {}
 vim.filetype.add({
@@ -10,6 +11,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require 'lspconfig'.html.setup({
 	capabilities = capabilities
 })
+
 -- treesitter setup
 require('nvim-treesitter.configs').setup({
 	ensure_installed = { 'astro', 'tsx', 'typescript', 'lua', 'html' },
@@ -18,13 +20,7 @@ require('nvim-treesitter.configs').setup({
 	ignore_install = { "javascript" },
 	highlight = {
 		enable = true,
-
-		-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-		-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-		-- the name of the parser)
-		-- list of language that will be disabled
 		disable = { "c", "rust" },
-		-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
 		disable = function(lang, buf)
 			local max_filesize = 100 * 1024 -- 100 KB
 			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -32,44 +28,24 @@ require('nvim-treesitter.configs').setup({
 				return true
 			end
 		end,
-
-		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
 
 })
 
 vim.treesitter.language.register("markdown", "mdx")
--- colorscheme
--- vim.cmd.colorscheme "catppuccin"
--- vim.cmd.colorscheme "monokai"
--- vim.cmd.colorscheme "gruvbox"
--- vim.cmd('colorscheme base16-tomorrow-night')
--- vim.cmd('colorscheme base16-gruvbox-material-dark-hard')
---vim.cmd('colorscheme base16-da-one-gray')
-vim.cmd('colorscheme onedark')
 
 -- [[ Basic Keymaps ]]
-
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
--- ...
-
 -- Keybinding to toggle the Markdown preview
 vim.api.nvim_set_keymap('n', '<leader>md', ':MarkdownPreviewToggle<CR>', { noremap = true, silent = true })
 
 -- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-
 vim.api.nvim_create_autocmd('TextYankPost', {
 	callback = function()
 		vim.highlight.on_yank()
@@ -117,6 +93,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -226,28 +203,31 @@ local opts = { noremap = true, silent = true }
 
 vim.keymap.set("n", "<C-c>", "<cmd>PickColor<cr>", opts)
 vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<cr>", opts)
--- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandRGB<cr>", opts)
--- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandHSL<cr>", opts)
 
-require("color-picker").setup({ -- for changing icons & mappings
-	-- ["icons"] = { "ﱢ", "" },
-	-- ["icons"] = { "ﮊ", "" },
-	-- ["icons"] = { "", "ﰕ" },
-	-- ["icons"] = { "", "" },
-	-- ["icons"] = { "", "" },
+require("color-picker").setup({
 	["icons"] = { "󱙳", " 󱌆" },
-	-- ["icons"] = { "󰣇", "󰣍" },
-	["border"] = "rounded", -- none | single | double | rounded | solid | shadow
-	["keymap"] = {       -- mapping example:
+	["border"] = "rounded",
+	["keymap"] = {
 		["U"] = "<Plug>ColorPickerSlider5Decrease",
 		["O"] = "<Plug>ColorPickerSlider5Increase",
 	},
-	["background_highlight_group"] = "Normal", -- default
-	["border_highlight_group"] = "FloatBorder", -- default
-	["text_highlight_group"] = "Normal",     --default
+	["background_highlight_group"] = "Normal",
+	["border_highlight_group"] = "FloatBorder",
+	["text_highlight_group"] = "Normal",
 })
 
-vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
+vim.cmd([[hi FloatBorder guibg=NONE]])
 
 vim.opt.conceallevel = 2
-vim.notify = require('notify')
+
+
+
+-- colorscheme
+-- vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "monokai"
+-- vim.cmd.colorscheme "gruvbox"
+-- vim.cmd('colorscheme base16-tomorrow-night')
+-- vim.cmd('colorscheme base16-gruvbox-material-dark-hard')
+vim.cmd('colorscheme base16-da-one-gray')
+-- vim.cmd('colorscheme onedark')
+-- vim.cmd('colorscheme base16-default-dark')

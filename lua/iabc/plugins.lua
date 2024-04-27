@@ -13,6 +13,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
+  'taylorskalyo/markdown-journal',
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "mg979/vim-visual-multi",
 
@@ -26,6 +27,10 @@ require('lazy').setup({
   'voldikss/vim-floaterm',
   'mfussenegger/nvim-dap',
   'nvim-tree/nvim-web-devicons',
+  {
+    "neoclide/coc.nvim",
+    branch = "release",
+  },
   {
     'tanvirtin/monokai.nvim' },
   {
@@ -48,6 +53,7 @@ require('lazy').setup({
     },
     lazy = false,
   },
+
   -- color picker
   {
     "ziontee113/color-picker.nvim",
@@ -55,6 +61,7 @@ require('lazy').setup({
       require("color-picker")
     end,
   },
+
   -- icon picker
   {
     "ziontee113/icon-picker.nvim",
@@ -68,6 +75,7 @@ require('lazy').setup({
       vim.keymap.set("n", "<A-i>", "<cmd>IconPickerInsert<cr>", opts)
     end
   },
+
   {
     'stevearc/dressing.nvim',
   },
@@ -88,6 +96,7 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
+
   -- glow for markdown preview
   { "ellisonleao/glow.nvim",         config = true, cmd = "Glow" },
 
@@ -95,6 +104,7 @@ require('lazy').setup({
     'akinsho/nvim-bufferline.lua',
     version = '*',
   },
+
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
@@ -108,30 +118,27 @@ require('lazy').setup({
       }
     end,
   },
+
   { 'folke/which-key.nvim', opts = {} },
-  "folke/zen-mode.nvim",
-  opts = {
-    window = {
-      backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-      -- height and width can be:
-      -- * an absolute number of cells when > 1
-      -- * a percentage of the width / height of the editor when <= 1
-      -- * a function that returns the width or the height
-      width = 120, -- width of the Zen window
-      height = 1,  -- height of the Zen window
-      -- by default, no options are changed for the Zen window
-      -- uncomment any of the options below, or add other vim.wo options you want to apply
-      options = {
-        signcolumn = "no",      -- disable signcolumn
-        number = false,         -- disable number column
-        relativenumber = false, -- disable relative numbers
-        cursorline = false,     -- disable cursorline
-        cursorcolumn = false,   -- disable cursor column
-        foldcolumn = "0",       -- disable fold column
-        -- list = false, -- disable whitespace characters
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        backdrop = 0.95,
+        width = 120,
+        height = 1,
+        options = {
+          signcolumn = "no",
+          number = false,
+          relativenumber = false,
+          cursorline = false,
+          cursorcolumn = false,
+          foldcolumn = "0",
+        },
       },
     },
   },
+
   -- Obsidian.nvim
   {
     "epwalsh/obsidian.nvim",
@@ -150,8 +157,9 @@ require('lazy').setup({
       },
     },
   },
+
   {
-       "SureshPradhana/markdown-preview.nvim",
+    "SureshPradhana/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     init = function()
@@ -160,7 +168,6 @@ require('lazy').setup({
     build = "cd app && npm install && git restore .",
 
   },
-  { "rcarriga/nvim-notify", },
 
   {
     'goolord/alpha-nvim',
@@ -174,7 +181,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
       },
@@ -193,110 +200,6 @@ require('lazy').setup({
       },
     }
   },
-
-
-
-
-  { -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      'folke/neodev.nvim',
-    },
-  },
-
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-    },
-    config =
-        function()
-          local cmp = require("cmp")
-          vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
-          local kind_icons = {
-            -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations
-            Text = " ",
-            Method = "󰆧",
-            Function = "ƒ ",
-            Constructor = " ",
-            Field = "󰜢 ",
-            Variable = " ",
-            Constant = " ",
-            Class = " ",
-            Interface = "󰜰 ",
-            Struct = " ",
-            Enum = "了 ",
-            EnumMember = " ",
-            Module = "",
-            Property = " ",
-            Unit = " ",
-            Value = "󰎠 ",
-            Keyword = "󰌆 ",
-            Snippet = " ",
-            File = " ",
-            Folder = " ",
-            Color = " ",
-          }
-
-          cmp.setup({
-            snippet = {
-              expand = function(args)
-                require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-              end,
-            },
-            view = {
-              entries = {
-                follow_cursor = true,
-              }
-            },
-
-            window = {
-              -- completion = cmp.config.window.bordered(),
-              -- documentation = cmp.config.window.bordered(),
-            },
-            mapping = cmp.mapping.preset.insert({
-              ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-              ["<C-f>"] = cmp.mapping.scroll_docs(4),
-              ["<C-Space>"] = cmp.mapping.complete(),
-              ["<C-e>"] = cmp.mapping.abort(),
-              ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-            }),
-            sources = cmp.config.sources({
-              { name = "nvim_lsp" },
-              { name = "nvim_lua" },
-              { name = "luasnip" }, -- For luasnip users.
-            }, {
-              { name = "buffer" },
-              { name = "path" },
-            }, {
-              { name = "neorg" },
-            })
-          })
-
-          cmp.setup.cmdline(":", {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-              { name = "path" },
-            }, {
-              { name = "cmdline" },
-            }),
-          })
-        end
-  },
-
-
-  -- custom plugins
-  -- { import = 'custom.plugins' },
-
 })
 
 local bufferline = require("bufferline");
