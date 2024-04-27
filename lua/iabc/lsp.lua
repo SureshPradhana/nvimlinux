@@ -1,0 +1,16 @@
+-- vim.g.markdown_fenced_langues = {
+--   "ts=typescript"
+-- }
+-- require 'lspconfig'.denols.setup {
+--   on_attach = on_attach,
+--   init_options = {
+--     lint = true,
+--     unstable = true,
+--   },
+--   root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
+-- }
+-- require 'lspconfig'.tsserver.setup {
+--   on_attach = on_attach,
+--   root_dir = require 'lspconfig'.util.root_pattern("package.json"),
+--   single_file_support = false
+-- }
