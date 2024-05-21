@@ -77,6 +77,8 @@ require('lazy').setup({
   },
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  'nvim-lua/popup.nvim',
+  'nvim-telescope/telescope-media-files.nvim',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make',
@@ -92,7 +94,7 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
-
+  'JoosepAlviste/nvim-ts-context-commentstring',
   -- glow for markdown preview
   { "ellisonleao/glow.nvim",         config = true, cmd = "Glow" },
 
@@ -248,6 +250,7 @@ require('lazy').setup({
             Color = " ",
           }
 
+
           cmp.setup({
             snippet = {
               expand = function(args)
@@ -261,8 +264,8 @@ require('lazy').setup({
             },
 
             window = {
-              -- completion = cmp.config.window.bordered(),
-              -- documentation = cmp.config.window.bordered(),
+              completion = cmp.config.window.bordered(),
+              documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
               ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -333,3 +336,9 @@ require('silicon').setup({
     path = "/home/suresh/linuxshare/snapShots/",
   },
 })
+
+
+require("telescope").load_extension("media_files")
+require("Comment").setup {
+  pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+}

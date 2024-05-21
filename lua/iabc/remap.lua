@@ -15,8 +15,8 @@ vim.api.nvim_set_keymap('n', '<S-Tab>', ':NvimTreeToggle<CR>', { noremap = true,
 vim.keymap.set("n", "'", "<C-w>", opts)
 
 
--- moves the selected text when in visual mode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)
+-- moves the selected text when in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
 
 -- create an executable
@@ -41,8 +41,6 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false
 })
 vim.g.copilot_no_tab_map = true
-
-
 
 vim.keymap.set('i', '<C-[>', '<Plug>(copilot-dismiss)')
 vim.keymap.set('i', '<M-]>', '<Plug>(copilot-next)')
