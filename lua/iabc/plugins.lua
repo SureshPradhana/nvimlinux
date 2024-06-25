@@ -32,6 +32,7 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.oceanic-next',
   require 'iabc.nvim-plugins.nord',
   require 'iabc.nvim-plugins.onedark',
+  require 'iabc.nvim-plugins.bamboo',
   require 'iabc.nvim-plugins.nvim-base16',
   require 'iabc.nvim-plugins.material',
   require 'iabc.nvim-plugins.nordtheme_vim',
@@ -57,6 +58,8 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.gitsigns',
   require 'iabc.nvim-plugins.nvim-lspconfig',
   require 'iabc.nvim-plugins.nvim-cmp',
+  require 'iabc.nvim-plugins.oil',
+  require 'iabc.nvim-plugins.neo-tree',
 })
 
 

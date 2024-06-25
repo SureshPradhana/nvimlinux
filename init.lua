@@ -126,3 +126,4 @@ vim.opt.conceallevel = 2
 vim.cmd('colorscheme base16-da-one-gray')
 -- vim.cmd('colorscheme onedark')
 -- vim.cmd('colorscheme base16-default-dark')
+-- vim.cmd('colorscheme bamboo')
