@@ -37,7 +37,6 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- Keybinding to toggle the Markdown preview
 vim.api.nvim_set_keymap('n', '<leader>md', ':MarkdownPreviewToggle<CR>', { noremap = true, silent = true })
-
 -- [[ Highlight on yank ]]
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -93,11 +92,6 @@ require('neodev').setup()
 
 -- color picker config
 local opts = { noremap = true, silent = true }
-
-vim.keymap.set("n", "<C-s>", "<cmd>PickColor<cr>", opts)
-vim.keymap.set("i", "<C-s>", "<cmd>PickColorInsert<cr>", opts)
-
-
 
 require("color-picker").setup({
 	["icons"] = { "󱙳", " 󱌆" },

@@ -45,7 +45,7 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.telescope-media-files',
   require 'iabc.nvim-plugins.telescope-fzf-native',
   require 'iabc.nvim-plugins.nvim-treesitter',
-  require 'iabc.nvim-plugins.nvim-ts-context-commentstring',
+  -- require 'iabc.nvim-plugins.nvim-ts-context-commentstring',
   require 'iabc.nvim-plugins.glow',
   require 'iabc.nvim-plugins.nvim-bufferline',
   require 'iabc.nvim-plugins.nvim-tree',
@@ -59,11 +59,12 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.nvim-lspconfig',
   require 'iabc.nvim-plugins.nvim-cmp',
   require 'iabc.nvim-plugins.oil',
-  require 'iabc.nvim-plugins.neo-tree',
+  require 'iabc.nvim-plugins.lorem',
+  require 'iabc.nvim-plugins.url-open',
 })
 
 
 require("telescope").load_extension("media_files")
-require("Comment").setup {
-  pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-}
+-- require("Comment").setup {
+--   pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+-- }

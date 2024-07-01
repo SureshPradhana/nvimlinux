@@ -2,24 +2,21 @@
 local set = vim.opt
 local g = vim.g
 
-
 -- Set highlight on search
 set.hlsearch = false
 set.incsearch = true
 
 -- Make line numbers default
-
 set.number = true         --line numbers
 
 set.relativenumber = true --relative line numbers
+
 -- Enable mouse mode
 set.mouse = 'a'
 set.tabstop = 4
 set.shiftwidth = 4
 set.scrolloff = 8
 set.textwidth = 96
-
-
 
 -- Sync clipboard between OS and Neovim.
 set.clipboard:append('unnamedplus')
@@ -38,10 +35,9 @@ set.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-set.updatetime = 250
-set.timeout = true
-set.timeoutlen = 300
-
+-- set.updatetime = 250
+-- set.timeout = true
+-- set.timeoutlen = 300
 
 -- show hidden files
 g.NERDTreeShowHidden = 1
@@ -52,7 +48,7 @@ set.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 set.termguicolors = true
 
-
+-- set fillchars=eob: ' ' to remove ~ at the end of the buffer
 vim.o.fillchars = vim.o.fillchars .. 'eob: '
 
 -- font settings
@@ -64,8 +60,6 @@ vim.o.fillchars = vim.o.fillchars .. 'eob: '
 -- Remove vertical split indicator
 vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a space
 
-
-
 -- autoformat on save
 local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -74,7 +68,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.format({ async = false })",
 })
 
+-- set flotern settings
+local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = fmtGroup,
+	pattern = { "*.svelte", "*.scss", "*.less", "*.sass", "*.css", "*.md", "*.markdown", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.jsonc", "*.py", "*.astro", "*.js", "*.ts" },
+	command = "lua vim.lsp.buf.format({ async = false })",
+})
 
+
+-- set floaterm keymaps
 g.floaterm_keymap_toggle = '<leader>\\'
 g.floaterm_keymap_new = '<leader>t'
 g.floaterm_keymap_next = '<leader>n'
@@ -96,7 +99,7 @@ function PrevFloatTerm()
 	g.floaterm_keymap_prev = '<leader>p'
 end
 
+-- set global extensions for coc
 g.coc_global_extensions = { 'coc-svelte', 'coc-json', 'coc-git', 'coc-html', 'coc-emmet', 'coc-pairs',
 	'coc-html-css-support', 'coc-json', 'coc-deno', 'coc-css', 'coc-tsserver', '@yaegassy/coc-intelephense',
 	'coc-snippets', 'coc-svelte' }
-
