@@ -61,6 +61,7 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.oil',
   require 'iabc.nvim-plugins.lorem',
   require 'iabc.nvim-plugins.url-open',
+  require 'iabc.nvim-plugins.overseer',
 })
 
 
