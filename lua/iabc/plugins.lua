@@ -18,7 +18,7 @@ require('lazy').setup({
   require 'iabc.nvim-plugins.markdown-journal',
   require 'iabc.nvim-plugins.indent-blankline',
   require 'iabc.nvim-plugins.visual-multi',
-  require 'iabc.nvim-plugins.silicon',
+  -- require 'iabc.nvim-plugins.silicon',
   require 'iabc.nvim-plugins.vim-rhubarb',
   require 'iabc.nvim-plugins.vim-sleuth',
   require 'iabc.nvim-plugins.copilot',

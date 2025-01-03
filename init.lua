@@ -121,3 +121,11 @@ vim.cmd('colorscheme base16-da-one-gray')
 -- vim.cmd('colorscheme onedark')
 -- vim.cmd('colorscheme base16-default-dark')
 -- vim.cmd('colorscheme bamboo')
+
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ledger",
+	callback = function()
+		vim.bo.commentstring = "; %s"
+	end,
+})
