@@ -1,5 +1,6 @@
-return {   -- Set lualine as statusline
+return { -- Set lualine as statusline
 	'nvim-lualine/lualine.nvim',
+	event = "VeryLazy",
 	opts = {
 		options = {
 			icons_enabled = false,

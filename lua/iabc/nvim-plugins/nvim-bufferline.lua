@@ -1,6 +1,7 @@
 return {
 	'akinsho/nvim-bufferline.lua',
 	version = '*',
+	event = "VeryLazy",
 	config = function()
 		-- Plugin configuration
 		local bufferline = require("bufferline")
