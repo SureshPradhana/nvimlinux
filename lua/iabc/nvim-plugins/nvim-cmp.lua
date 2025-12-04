@@ -8,6 +8,7 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"saadparwaiz1/cmp_luasnip",
 		"L3MON4D3/LuaSnip",
+		"dnnr1/lorem-ipsum.nvim", -- 👈 Add this line
 	},
 	config =
 		function()
@@ -67,6 +68,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
 					{ name = "luasnip" }, -- For luasnip users.
+					{ name = "lorem_ipsum" },
 				}, {
 					{ name = "buffer" },
 					{ name = "path" },
