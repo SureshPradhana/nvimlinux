@@ -129,3 +129,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo.commentstring = "; %s"
 	end,
 })
+
+require('lspconfig').harper_ls.setup {}
