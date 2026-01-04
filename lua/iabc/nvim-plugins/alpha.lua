@@ -1,3 +1,4 @@
+-- greeter
 return {
 	'goolord/alpha-nvim',
 	config = function()

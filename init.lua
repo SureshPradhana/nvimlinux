@@ -60,7 +60,6 @@ require('telescope').setup {
 }
 
 
-
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -129,5 +128,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo.commentstring = "; %s"
 	end,
 })
+
+
 
 require('lspconfig').harper_ls.setup {}

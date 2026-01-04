@@ -3,7 +3,7 @@ local set = vim.opt
 local g = vim.g
 
 -- Set highlight on search
-set.hlsearch = false
+set.hlsearch = true
 set.incsearch = true
 
 -- Make line numbers default
@@ -60,12 +60,25 @@ vim.o.fillchars = vim.o.fillchars .. 'eob: '
 -- Remove vertical split indicator
 vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a space
 
+
 -- autoformat on save
 local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
+
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = fmtGroup,
-	pattern = { "*.svelte", "*.scss", "*.less", "*.sass", "*.css", "*.md", "*.markdown", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.jsonc", "*.py", "*.astro", "*.js", "*.ts" },
-	command = "lua vim.lsp.buf.format({ async = false })",
+	pattern = {
+		"*.svelte", "*.scss", "*.less", "*.sass", "*.css",
+		"*.md", "*.markdown",
+		"*.lua", "*.go", "*.html", "*.rs",
+		"*.json", "*.jsonc",
+		"*.py", "*.js", "*.ts",
+	},
+	callback = function()
+		vim.lsp.buf.format({
+			async = false,
+			timeout_ms = 2000,
+		})
+	end,
 })
 
 -- set flotern settings
@@ -103,4 +116,3 @@ end
 g.coc_global_extensions = { 'coc-svelte', 'coc-json', 'coc-git', 'coc-html', 'coc-emmet', 'coc-pairs',
 	'coc-html-css-support', 'coc-json', 'coc-deno', 'coc-css', 'coc-tsserver', '@yaegassy/coc-intelephense',
 	'coc-snippets', 'coc-svelte' }
-
