@@ -4,6 +4,7 @@ return {
 	config = function()
 		require("conform").setup({
 			formatters_by_ft = {
+				lua = { "stylua" }, -- 🔑 add this
 				javascript = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				typescript = { "prettierd" },
@@ -12,11 +13,16 @@ return {
 				json = { "prettierd" },
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				timeout_ms = 5000,
+				lsp_fallback = false, -- 🔑 change this
 			},
 		})
+
 		vim.api.nvim_create_user_command("Format", function()
-			require("conform").format({ lsp_fallback = true })
+			require("conform").format({
+				timeout_ms = 5000,
+				lsp_fallback = true, -- OK manually
+			})
 		end, {})
 	end,
 }

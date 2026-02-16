@@ -57,3 +57,12 @@ vim.keymap.set("i", "<C-s>", "<cmd>PickColorInsert<cr>", opts)
 
 -- open url under cursor
 vim.keymap.set("n", "<C-u>", ":URLOpenUnderCursor<CR>", opts)
+
+-- ignore count for dd (only ever delete 1 line)
+vim.keymap.set("n", "dd", function()
+	if vim.v.count > 1 then
+		vim.notify("Use d" .. vim.v.count .. "d to delete " .. vim.v.count .. " lines", vim.log.levels.WARN)
+		return "dd"
+	end
+	return "dd"
+end, { expr = true })

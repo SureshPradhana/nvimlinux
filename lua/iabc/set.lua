@@ -39,9 +39,6 @@ vim.wo.signcolumn = 'yes'
 -- set.timeout = true
 -- set.timeoutlen = 300
 
--- show hidden files
-g.NERDTreeShowHidden = 1
-
 -- Set completeopt to have a better completion experience
 set.completeopt = 'menuone,noselect'
 
@@ -61,58 +58,13 @@ vim.o.fillchars = vim.o.fillchars .. 'eob: '
 vim.cmd [[set fillchars+=vert:\ ]] -- Set the vertical split character to a space
 
 
--- autoformat on save
-local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = fmtGroup,
-	pattern = {
-		"*.svelte", "*.scss", "*.less", "*.sass", "*.css",
-		"*.md", "*.markdown",
-		"*.lua", "*.go", "*.html", "*.rs",
-		"*.json", "*.jsonc",
-		"*.py", "*.js", "*.ts",
-	},
-	callback = function()
-		vim.lsp.buf.format({
-			async = false,
-			timeout_ms = 2000,
-		})
-	end,
-})
-
--- set flotern settings
-local fmtGroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = fmtGroup,
-	pattern = { "*.svelte", "*.scss", "*.less", "*.sass", "*.css", "*.md", "*.markdown", "*.lua", "*.go", "*.html", "*.rs", "*.json", "*.jsonc", "*.py", "*.astro", "*.js", "*.ts" },
-	command = "lua vim.lsp.buf.format({ async = false })",
-})
-
+-- autoformat on save is handled by conform.nvim (see `lua/iabc/nvim-plugins/conform.lua`)
+-- This avoids running multiple formatters on every save, which was slowing down `:w` and
+-- could cause timeouts. If you want LSP-only format-on-save instead of conform,
+-- you can add a single BufWritePre autocmd here, but don't duplicate it.
 
 -- set floaterm keymaps
 g.floaterm_keymap_toggle = '<leader>\\'
 g.floaterm_keymap_new = '<leader>t'
 g.floaterm_keymap_next = '<leader>n'
 g.floaterm_keymap_prev = '<leader>p'
--- Define a function to toggle the floatterm
-function ToggleFloatTerm()
-	g.floaterm_keymap_toggle = '<leader>\\'
-end
-
-function NewFloatTerm()
-	g.floaterm_keymap_new = '<leader>t'
-end
-
-function NextFloatTerm()
-	g.floaterm_keymap_next = '<leader>n'
-end
-
-function PrevFloatTerm()
-	g.floaterm_keymap_prev = '<leader>p'
-end
-
--- set global extensions for coc
-g.coc_global_extensions = { 'coc-svelte', 'coc-json', 'coc-git', 'coc-html', 'coc-emmet', 'coc-pairs',
-	'coc-html-css-support', 'coc-json', 'coc-deno', 'coc-css', 'coc-tsserver', '@yaegassy/coc-intelephense',
-	'coc-snippets', 'coc-svelte' }

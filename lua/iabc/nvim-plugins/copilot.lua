@@ -1,2 +1,5 @@
 -- github copilot plugin for neovim
-return { 'github/copilot.vim' }
+return {
+	'github/copilot.vim',
+	event = 'InsertEnter',
+}
